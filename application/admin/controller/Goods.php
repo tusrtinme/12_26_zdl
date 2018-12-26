@@ -93,6 +93,7 @@ class Goods extends BaseAdmin{
         if(input('g_up')){
             $data['g_up']=1;
         }
+        dump($data);die;
         $re=$this->model->addGoods($data);
         if($re){
             $this->success("添加成功");
