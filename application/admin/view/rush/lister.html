@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+{include file="public:header"}
+</head>
+
+<body class="no-skin">
+<!--头部-->
+{include file="public:nav"}
+
+<div class="main-container ace-save-state" id="main-container">
+  <!--菜单-->
+  <script type="text/javascript">
+  try{ace.settings.loadState('main-container')}catch(e){}
+</script>
+
+{include file="public:left"}
+
+  <div class="main-content">
+    <div class="main-content-inner">
+      <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+        <ul class="breadcrumb">
+          <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="{:url('Index/index')}">首页</a>
+          </li>
+          <li class="active">时间管理</li>
+        </ul><!-- /.breadcrumb -->
+      </div>
+
+      <div class="page-content">
+
+        {include file="public:set"}
+
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="col-sm-10 col-sm-offset-1">
+              <div class="widget-box transparent">
+                <div class="widget-header widget-header-large">
+                  <h3 class="widget-title grey lighter">
+                    <i class="ace-icon fa fa-leaf green"></i>
+                    时间管理
+                  </h3>
+                </div>
+                <div class="widget-body">
+                  <div class="widget-main">
+                    <form class="form-horizontal" method="post" id="logoForm" action="__URL__/save">
+                      <div class="form-group">
+                        <label for="dtp_input1" class="col-md-2 control-label">到期时间</label>
+			                <div class='input-group date' id='datetimepicker2'>
+			                <input type='text' class="form-control" name="end_time" value="{$re.end_time|date='Y-m-d H:i',###}" />
+			                <span class="input-group-addon">
+			                    <span class="glyphicon glyphicon-calendar"></span>
+			                </span>
+			            </div>
+
+                </div>
+                <input type="hidden" id="dtp_input1" value="" /><br/>
+                      </div>
+
+                      <div class="clearfix form-actions">
+                        <div class="col-md-offset-3 col-md-9">
+                          <button class="btn btn-info" type="submit">
+                            <i class="ace-icon fa fa-floppy-o bigger-110"></i>
+                            保存
+                          </button>
+                          <button class="btn" type="reset">
+                            <i class="ace-icon fa fa-undo bigger-110"></i>
+                            重置
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- PAGE CONTENT BEGINS -->
+            <!-- PAGE CONTENT ENDS -->
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.page-content -->
+    </div>
+  </div><!-- /.main-content -->
+
+ {include file="public:footer"}
+
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+  <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+</a>
+</div>
+
+<!-- inline scripts related to this page -->
+<script>
+$(function () {
+	 
+    $('#datetimepicker1').datetimepicker({
+        format: 'YYYY-MM-DD',
+        autoclose:true,
+		language:"zh-CN",
+      format:"yyyy-mm-dd"
+    });
+    $('#datetimepicker2').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm',
+        locale: moment.locale('zh-cn')
+    });
+  
+});
+</script>
+<script>
+
+  jQuery(function($) {
+	  
+    $('[data-rel=tooltip]').tooltip();
+
+    $( "#hide-option" ).tooltip({
+      hide: {
+        effect: "explode",
+        delay: 250
+      }
+    });
+
+  })
+  
+</script>
+<script>
+$(function(){
+	$('#logoForm').ajaxForm({
+		beforeSubmit: checkForm, // 此方法主要是提交前执行的方法，根据需要设置
+		success: complete, // 这是提交后的方法
+		dataType: 'json'
+	});
+	
+	function checkForm(){
+	  
+		
+    }
+
+	function complete(data){
+		if(data.status==1){
+			layer.alert(data.msg, {icon: 5}, function(index){
+ 			layer.close(index);
+ 			window.location.href=data.url;
+			});
+			
+		}else{
+			layer.alert(data.msg, {icon: 6}, function(index){
+ 			layer.close(index);
+ 			window.location.href=data.url;
+			});
+			
+		}
+	}
+ 
+});
+</script>
+
+</body>
+</html>

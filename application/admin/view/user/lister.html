@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+{include file="public:header"}
+
+<body class="no-skin">
+<!--头部-->
+{include file="public:nav"}
+
+<div class="main-container ace-save-state" id="main-container">
+  <!--菜单-->
+  <script type="text/javascript">
+  try{ace.settings.loadState('main-container')}catch(e){}
+</script>
+
+{include file="public:left"}
+
+  <div class="main-content">
+    <div class="main-content-inner">
+      <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+        <ul class="breadcrumb">
+          <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="{:url('Index/index')}">首页</a>
+          </li>
+          <li class="active">用户列表</li>
+        </ul><!-- /.breadcrumb -->
+
+      </div>
+
+      <div class="page-content">
+        {include file="public:set"}
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="col-sm-10 col-sm-offset-1">
+              <div class="page-header">
+                <div class="row">
+               <!--  <div class="col-sm-4">
+                <a class="btn btn-success btn-white btn-bold" href="{:url('News/add')}">
+                  <i class="ace-icon fa fa-plus icon-only"></i>
+                  添加</a>
+                <button id="change" class="btn btn-warning btn-white btn-bold">
+                  <i class="fa fa-exchange"></i>
+                  排序
+                </button>
+                <button class="btn btn-danger btn-white btn-bold del-btn">
+                  <i class="ace-icon fa fa-trash-o icon-only"></i>
+                  删除
+                </button>
+                </div> -->
+
+               <div class="col-sm-12 clearfix">
+                  <form class="form-inline pull-right" action="__URL__/index" method="post">
+                                       
+                    <div class="form-group">
+                      <div class="input-group">
+									
+                        <input type="text" name="phone"  class="form-control search-query" value="{$phone}" placeholder="请输入手机号码">
+                        <span class="input-group-btn">
+										<button type="submit" class="btn btn-info btn-sm ajax-search-form">
+											<span class="ace-icon fa fa-search icon-on-right bigger-120"></span> 搜索
+									</button>
+									</span>
+                      </div>
+                    </div>
+                  </form>
+                </div> 
+                </div>
+              </div>
+              <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  
+                  <th>ID</th>
+                  
+                  <th>手机号码</th>
+                  <th>会员等级</th>
+                  <th class="hidden-480">用户昵称</th>
+                  <th>生日</th>
+                  <th class="hidden-480">性别</th>
+                  <th class="hidden-480">头像</th>
+                  <th>待返积分</th>
+                  <th>每日释放积分</th>
+                  <th>可用积分</th>
+                  <th>推广二维码</th>
+                  <th>注册时间</th>
+                  <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {volist name="list" id="v"}
+                <tr class="ace-thumbnails">
+                 
+                  <td><span class="badge badge-grey">{$v.uid}</span></td>
+                  <td>{$v.phone}</td>
+                  <td>
+                   {if condition="$v.level eq 1"}普通会员{/if}
+                   {if condition="$v.level eq 2"}经销商{/if}
+                   {if condition="$v.level eq 3"}总代理{/if}
+                  </td>
+                  <td>{$v.nickname}</td>
+                  <td>{$v.birth}</td>
+                  <td class="hidden-480">
+                  {if condition="$v.sex eq 0"}保密{/if}
+                  {if condition="$v.sex eq 1"}男{/if}
+                  {if condition="$v.sex eq 2"}女{/if}
+                  </td>
+                  <td class="ace-thumbnails hidden-480">
+                    <li><a href="{$v.image}" data-rel="colorbox">
+                      <img width="80" height="80" alt="150x150" src="{$v.image}"/>
+                      <div class="text">
+                        <div class="inner">点击放大</div>
+                      </div>
+                    </a></li>
+                  </td>
+                  <td class="hidden-480">{$v.integz}   <a class="btn btn-success btn-white btn-bold" href="javascript:;" onclick="add_integz({$v.uid})">
+                  <i class="ace-icon fa fa-plus icon-only"></i>
+                 </a></td>
+                  <td class="hidden-480">{$v.integf}
+                  <a class="btn btn-success btn-white btn-bold" href="javascript:;" onclick="add_integf({$v.uid})">
+                  <i class="ace-icon fa fa-plus icon-only"></i>
+                 </a>
+                  </td>
+                  <td class="hidden-480">{$v.integ}
+                  <a class="btn btn-success btn-white btn-bold" href="javascript:;" onclick="add_integ({$v.uid})">
+                  <i class="ace-icon fa fa-plus icon-only"></i>
+                 </a>
+                  </td>
+                   <td class="ace-thumbnails hidden-480">
+                    <li><a href="{$v.qcode}" data-rel="colorbox">
+                      <img width="80" height="80" alt="150x150" src="{$v.qcode}"/>
+                      <div class="text">
+                        <div class="inner">点击放大</div>
+                      </div>
+                    </a></li>
+                  </td>
+                  <td>{$v.time|date="Y-m-d H:i:s",###}</td>
+                  
+                  <td>
+                  	<a class="btn btn-xs btn-info" href="{:url('detail',array('id'=>$v['uid']))}">
+                      积分明细
+                    </a>
+                    <a class="btn btn-xs btn-success" href="{:url('lister',array('id'=>$v['uid']))}">
+                      下级代理
+                    </a>
+                    <button class="btn btn-xs btn-danger" type="button" onclick="dels({$v.uid})">
+                      <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                    </button>
+                  </td>
+                 
+                </tr>
+                {/volist}
+                {empty name="list"}<tr><td colspan="15" class="text-center">暂无数据</td></tr>{/empty}
+                </tbody>
+              </table>
+              <div class="text-center">
+                {$page}
+              </div>
+            </div>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.page-content -->
+    </div>
+  </div><!-- /.main-content -->
+
+{include file="public:footer"}
+
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+  <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+</a>
+</div><!-- /.main-container -->
+
+<script>
+  jQuery(function($) {
+    $('[data-rel=tooltip]').tooltip();
+
+    $( "#hide-option" ).tooltip({
+      hide: {
+        effect: "explode",
+        delay: 250
+      }
+    });
+
+  })
+</script>
+<script type="text/javascript">
+		function dels(id){
+			layer.confirm('你确定删除吗？', {icon: 3}, function(index){
+		    layer.close(index);
+		    window.location.href="__URL__/delete/id/"+id;
+		  });
+	    }
+		</script>
+<script>
+function add_integz(id){
+	layer.prompt({title: '请输入要充值的待返积分', formType: 3}, function(text, index){
+	    
+	    var n = /^[1-9]\d*$/; 
+        if(!n.test(text)){
+            layer.alert('请输入正确的充值积分');return false;
+        }else{
+        	$.ajax({
+        		type:"post",
+        		url:"__URL__/add_integz",
+        		data:{id:id,integz:text},
+        		datatype:"text",
+        		success:function(re){
+        			if(re == 1){
+        				layer.close(index);
+        				layer.msg("充值成功");
+        				location.reload();
+        			}else{
+        				layer.close(index);
+        				layer.msg("系统繁忙，请稍后再试");
+        				location.reload();
+        			}
+        			
+        		}
+        	})
+        }
+	  });
+}
+function add_integf(id){
+	layer.prompt({title: '请输入要充值的释放积分', formType: 3}, function(text, index){
+	    
+	    var n = /^[1-9]\d*$/; 
+        if(!n.test(text)){
+            layer.alert('请输入正确的充值积分');return false;
+        }else{
+        	$.ajax({
+        		type:"post",
+        		url:"__URL__/add_integf",
+        		data:{id:id,integz:text},
+        		datatype:"text",
+        		success:function(re){
+        			if(re == 1){
+        				layer.close(index);
+        				layer.msg("充值成功");
+        				location.reload();
+        			}else{
+        				layer.close(index);
+        				layer.msg("系统繁忙，请稍后再试");
+        				location.reload();
+        			}
+        			
+        		}
+        	})
+        }
+	  });
+}
+function add_integ(id){
+	layer.prompt({title: '请输入要充值的积分', formType: 3}, function(text, index){
+	    
+	    var n = /^[1-9]\d*$/; 
+        if(!n.test(text)){
+            layer.alert('请输入正确的充值积分');return false;
+        }else{
+        	$.ajax({
+        		type:"post",
+        		url:"__URL__/add_integ",
+        		data:{id:id,integz:text},
+        		datatype:"text",
+        		success:function(re){
+        			if(re == 1){
+        				layer.close(index);
+        				layer.msg("充值成功");
+        				location.reload();
+        			}else{
+        				layer.close(index);
+        				layer.msg("系统繁忙，请稍后再试");
+        				location.reload();
+        			}
+        			
+        		}
+        	})
+        }
+	  });
+}
+</script>
+
+
+  <script>
+  $("#change").click(function(){
+  	$("#sortForm").submit();
+  })
+
+  </script>
+</body>
+</html>

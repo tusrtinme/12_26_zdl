@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+{include file="public:header"}
+<body class="no-skin">
+<!--头部-->
+{include file="public:nav"}
+<div class="main-container ace-save-state" id="main-container">
+  <!--菜单-->
+  <script type="text/javascript">
+  try{ace.settings.loadState('main-container')}catch(e){}
+</script>
+
+{include file="public:left"}
+  <div class="main-content">
+    <div class="main-content-inner">
+      <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+        <ul class="breadcrumb">
+          <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="{:url('Index/index')}">首页</a>
+          </li>
+          <li class="active">控制台</li>
+        </ul><!-- /.breadcrumb -->
+
+      </div>
+
+      <div class="page-content">
+       {include file="public:set"}
+
+        <div class="row">
+          <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <div class="alert alert-block alert-success">
+              <button type="button" class="close" data-dismiss="alert">
+                <i class="ace-icon fa fa-times"></i>
+              </button>
+
+              <i class="ace-icon fa fa-check green"></i>
+
+              欢迎使用
+              <strong class="green">
+                <a href="http://www.toopen.cn" target="_blank">朵朵科技</a>后台管理系统
+                <small>(v1.1)</small>
+              </strong>,
+              轻量级好用的后台管理系统
+            </div>
+
+            <div class="row">
+             
+
+              <div class="col-sm-8">
+                <div class="widget-box widget-color-dark transparent">
+                  <div class="widget-header widget-header-flat">
+                    <h4 class="widget-title smaller">
+                      技术支持
+                    </h4>
+                  </div>
+
+                  <div class="widget-body">
+                    <div class="widget-main">
+                      <div class="alert alert-info">
+                        "创新"是朵朵的生存之本，"诚信"是朵朵的一贯宗旨。优质服务、塑造互联网领域的品牌是我们的 前进目标。在朵朵科技 ，我们坚信，只有提供一流的服务，才能赢得用户长久的信任，热诚希望与您的合作能够成功!
+                        <br>
+                      </div>
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <blockquote class="pull-right">
+                            <p class="lighter line-height-125">优质服务、塑造互联网领域的品牌是我们的 前进目标。</p>
+
+                            <small>
+                              朵朵科技</small>
+                          </blockquote>
+                        </div>
+                      </div>
+
+                      <hr>
+                      <address>
+                        <strong>联系我们</strong>
+
+                        <br>
+                        郑州市金水区花园路国基路
+                        <br>
+                        恒华大厦806室
+                        <br>
+                        <i class="ace-icon fa fa-phone"></i>
+                        <a href="tel:0371-56776661">(0371) 56776661</a>
+                      </address>
+
+                      <address>
+                        <strong>E-mail</strong>
+
+                        <br>
+                        <a href="mailto:279585301@qq.com">279585301@qq.com</a>
+                      </address>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- /.col -->
+            </div><!-- /.row -->
+            <!-- PAGE CONTENT ENDS -->
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.page-content -->
+    </div>
+  </div><!-- /.main-content -->
+
+{include file="public:footer"}
+
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+  <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+</a>
+</div><!-- /.main-container -->
+
+
+
+<script>
+  jQuery(function($) {
+    $('[data-rel=tooltip]').tooltip();
+
+    $( "#hide-option" ).tooltip({
+      hide: {
+        effect: "explode",
+        delay: 250
+      }
+    });
+
+  })
+</script>
+
+</body>
+</html>

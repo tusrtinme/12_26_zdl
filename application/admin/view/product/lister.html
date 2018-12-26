@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+{include file="public:header"}
+
+<body class="no-skin">
+<!--头部-->
+{include file="public:nav"}
+
+<div class="main-container ace-save-state" id="main-container">
+  <!--菜单-->
+  <script type="text/javascript">
+  try{ace.settings.loadState('main-container')}catch(e){}
+</script>
+
+{include file="public:left"}
+
+  <div class="main-content">
+    <div class="main-content-inner">
+      <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+        <ul class="breadcrumb">
+          <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="{:url('Index/index')}">首页</a>
+          </li>
+          <li class="active">商品管理</li>
+          <li class="active">商品列表</li>
+        </ul><!-- /.breadcrumb -->
+
+      </div>
+
+      <div class="page-content">
+        {include file="public:set"}
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="col-sm-10 col-sm-offset-1">
+              <div class="page-header">
+                <div class="row">
+                <div class="col-sm-4">
+                <a class="btn btn-success btn-white btn-bold" href="{:url('Product/add')}">
+                  <i class="ace-icon fa fa-plus icon-only"></i>
+                  添加</a>
+                <button id="change" class="btn btn-warning btn-white btn-bold">
+                  <i class="fa fa-exchange"></i>
+                  排序
+                </button>
+                <button class="btn btn-danger btn-white btn-bold del-btn">
+                  <i class="ace-icon fa fa-trash-o icon-only"></i>
+                  删除
+                </button>
+                </div>
+
+                <!-- <div class="col-sm-8 clearfix">
+                  <form class="form-inline pull-right" action="">
+                    <div class="form-group">
+                      <div class="input-group">
+									<span class="input-group-addon">
+											<i class="fa fa-th-list"></i>
+										</span>
+                        <select class="form-control" name="" id="">
+                          <option selected value="">分类</option>
+                          <option value="">asdasd</option>
+                          <option value="">asdasd</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="input-group">
+									<span class="input-group-addon">
+											<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+										</span>
+                        <input type="text" class="form-control" value="" placeholder="点击选择日期范围" name="date-range-picker"
+                               id="id-date-range-picker-1">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="input-group">
+									<span class="input-group-addon">
+										<i class="ace-icon fa fa-check"></i>
+									</span>
+                        <input type="text" name="key" id="key" class="form-control search-query" value="" placeholder="请输入需查询的关键字">
+                        <span class="input-group-btn">
+										<button type="submit" class="btn btn-info btn-sm ajax-search-form">
+											<span class="ace-icon fa fa-search icon-on-right bigger-120"></span> 搜索
+									</button>
+									</span>
+                      </div>
+                    </div>
+                  </form>
+                </div> -->
+                </div>
+              </div>
+              <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th class="center">
+                    <label class="pos-rel">
+                      <input type="checkbox" class="ace checkAll">
+                      <span class="lbl"></span>
+                    </label>
+                  </th>
+                  <th>ID</th>
+                  <th class="hidden-480">排序</th>
+                  <th>名称</th>
+                  <th>标题</th>
+                  <th class="hidden-480">缩略图</th>
+                  <th>状态</th>
+                  <th style="border-right:#ddd solid 1px;">操作</th>
+                </tr>
+                </thead>
+                <form id="sortForm" action="__URL__/sort" method="post"> 
+                <tbody>
+                {volist name="list" id="v"}
+                <tr class="ace-thumbnails">
+                  <td class="center"><label class="pos-rel">
+                    <input type="checkbox" class="ace check" value="{$v.id}">
+                    <span class="lbl"></span>
+                  </label>
+                  </td>
+                  <td><span class="badge badge-grey">{$v.id}</span></td>
+                  <td class="hidden-480"><input class="input-small" type="number" name="{$v.id}" value="{$v.sort}"></td>
+                  <td>{$v.name}</td>
+                  <td>{$v.title}</td>
+                  <td class="ace-thumbnails hidden-480">
+                    <li><a href="__IMG__/{$v.image}" data-rel="colorbox">
+                      <img width="80" height="80" alt="150x150" src="__IMG__/{$v.image}"/>
+                      <div class="text">
+                        <div class="inner">点击放大</div>
+                      </div>
+                    </a></li>
+                  </td>
+                  <td>
+                    <label>
+                      <input id="statu" name="status" onclick="change({$v.id})" class="ace ace-switch ace-switch-6" type="checkbox" {if condition="$v.status eq 1"}checked{/if} />
+                      <span class="lbl"></span>
+                    </label>
+                  </td>
+                  <td>
+                    <a class="btn btn-xs btn-info" href="{:url('modifys',array('id'=>$v['id']))}">
+                      <i class="ace-icon fa fa-pencil bigger-120"></i>
+                    </a>
+                    <button class="btn btn-xs btn-danger" type="button" onclick="dels({$v.id})">
+                      <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                    </button>
+                  </td>
+                </tr>
+                {/volist}
+                {empty name="list"}<tr><td colspan="10" class="text-center">暂无数据</td></tr>{/empty}
+                </tbody>
+                </form>
+              </table>
+              <div class="text-center">
+                {$page}
+              </div>
+            </div>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.page-content -->
+    </div>
+  </div><!-- /.main-content -->
+
+  <div class="footer">
+  <div class="footer-inner">
+    <div class="footer-content">
+						<span class="bigger-110">
+							<span class="blue bolder">Ace</span>
+							朵朵科技CMS &copy; 2018-2020
+						</span>
+
+      &nbsp; &nbsp;
+      <a href="http://www.dd371.com" target="_blank">技术支持: 朵朵科技</a>
+    </div>
+  </div>
+</div>
+
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+  <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+</a>
+</div><!-- /.main-container -->
+
+<script>
+  jQuery(function($) {
+    $('[data-rel=tooltip]').tooltip();
+
+    $( "#hide-option" ).tooltip({
+      hide: {
+        effect: "explode",
+        delay: 250
+      }
+    });
+
+  })
+</script>
+<script type="text/javascript">
+		function dels(id){
+			layer.confirm('你确定删除吗？', {icon: 3}, function(index){
+		    layer.close(index);
+		    window.location.href="__URL__/delete/id/"+id;
+		  });
+	    }
+		</script>
+<script>
+function change(id){
+	$.ajax({
+		type:"post",
+		url:"__URL__/change",
+	    data:{id:id},
+	    datatype:"text",
+	    success:function(){
+	    	
+	    }
+	})
+}
+
+</script>
+
+
+  <script>
+  $("#change").click(function(){
+  	$("#sortForm").submit();
+  })
+
+  </script>
+</body>
+</html>

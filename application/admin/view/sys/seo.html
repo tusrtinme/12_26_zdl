@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+{include file="public:header"}
+</head>
+
+<body class="no-skin">
+<!--头部-->
+{include file="public:nav"}
+
+<div class="main-container ace-save-state" id="main-container">
+  <!--菜单-->
+  <script type="text/javascript">
+  try{ace.settings.loadState('main-container')}catch(e){}
+</script>
+
+{include file="public:left"}
+
+  <div class="main-content">
+    <div class="main-content-inner">
+      <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+        <ul class="breadcrumb">
+          <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="{:url('Index/index')}">首页</a>
+          </li>
+          <li class="active">网站设置</li>
+          <li class="active">网站优化</li>
+        </ul><!-- /.breadcrumb -->
+      </div>
+
+      <div class="page-content">
+
+        {include file="public:set"}
+
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="col-sm-10 col-sm-offset-1">
+              <div class="widget-box transparent">
+                <div class="widget-header widget-header-large">
+                  <h3 class="widget-title grey lighter">
+                    <i class="ace-icon fa fa-leaf green"></i>
+                    网站优化
+                  </h3>
+                </div>
+                <div class="widget-body">
+                  <div class="widget-main">
+                    <form class="form-horizontal" method="post" id="logoForm" action="__URL__/saves">
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right" for="">首页标题</label>
+                        <div class="col-sm-8">
+                          <input class="form-control" type="text" name="title" value="{$re.title}" >
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right" for="">SEO关键词</label>
+                        <div class="col-sm-8">
+                          <textarea class="form-control limited" name="keywords" id="" cols="" rows="3"
+                                    maxlength="200">{$re.keywords}</textarea>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right" for="">SEO描述</label>
+                        <div class="col-sm-8">
+                          <textarea class="form-control limited" name="description" id="" cols="" rows="3"
+                                    maxlength="200">{$re.description}</textarea>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right" for="">版权信息</label>
+                        <div class="col-sm-8">
+                          <textarea class="form-control limited" name="copy" id="" cols="" rows="3"
+                                    maxlength="100">{$re.copy}</textarea>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right" for="">统计代码</label>
+                        <div class="col-sm-8">
+                          <textarea class="form-control" name="code" id="" cols="" rows="5">{$re.code}</textarea>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right" for="">技术支持</label>
+                        <div class="col-sm-8">
+                          <textarea class="form-control" name="support" id="" cols="" rows="">{$re.support}</textarea>
+                        </div>
+                      </div>
+
+                      <div class="clearfix form-actions">
+                        <div class="col-md-offset-3 col-md-9">
+                          <button class="btn btn-info" type="submit">
+                            <i class="ace-icon fa fa-floppy-o bigger-110"></i>
+                            保存
+                          </button>
+                          <button class="btn" type="reset">
+                            <i class="ace-icon fa fa-undo bigger-110"></i>
+                            重置
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- PAGE CONTENT BEGINS -->
+            <!-- PAGE CONTENT ENDS -->
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.page-content -->
+    </div>
+  </div><!-- /.main-content -->
+
+{include file="public:footer"}
+
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+  <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+</a>
+</div>
+
+<!-- inline scripts related to this page -->
+<script>
+  jQuery(function($) {
+    $('[data-rel=tooltip]').tooltip();
+
+    $( "#hide-option" ).tooltip({
+      hide: {
+        effect: "explode",
+        delay: 250
+      }
+    });
+
+  })
+</script>
+<script>
+$(function(){
+	$('#logoForm').ajaxForm({
+		beforeSubmit: checkForm, // 此方法主要是提交前执行的方法，根据需要设置
+		success: complete, // 这是提交后的方法
+		dataType: 'json'
+	});
+	
+	function checkForm(){
+	  
+		
+    }
+
+	function complete(data){
+		if(data.status==1){
+			layer.alert(data.msg, {icon: 5}, function(index){
+ 			layer.close(index);
+ 			window.location.href=data.url;
+			});
+			
+		}else{
+			layer.alert(data.msg, {icon: 6}, function(index){
+ 			layer.close(index);
+ 			window.location.href=data.url;
+			});
+			
+		}
+	}
+ 
+});
+</script>
+
+</body>
+</html>

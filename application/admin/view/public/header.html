@@ -1,0 +1,140 @@
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta charset="utf-8" />
+<title>{$sys.name}</title>
+
+<meta name="description" content="overview &amp; stats" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<link rel="shortcut icon" href="">
+
+<!-- bootstrap & fontawesome -->
+<link rel="stylesheet" href="__ADMIN__/assets/css/bootstrap.min.css" />
+<link rel="stylesheet" href="__ADMIN__/assets/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+<!-- page specific plugin styles -->
+<link rel="stylesheet" href="__ADMIN__/assets/css/jquery-ui.custom.min.css" />
+<link rel="stylesheet" href="__ADMIN__/assets/css/jquery.gritter.min.css" />
+<link rel="stylesheet" href="__ADMIN__/assets/css/bootstrap-datepicker3.min.css" />
+<link rel="stylesheet" href="__ADMIN__/assets/css/bootstrap-timepicker.min.css" />
+<link rel="stylesheet" href="__ADMIN__/assets/css/daterangepicker.min.css" />
+<link rel="stylesheet" href="__ADMIN__/assets/css/bootstrap-datetimepicker.min.css" />
+<link rel="stylesheet" href="__ADMIN__/assets/css/colorbox.min.css" />
+
+<!-- text fonts -->
+<link rel="stylesheet" href="__ADMIN__/assets/css/fonts.googleapis.com.css" />
+
+<!-- ace styles -->
+<link rel="stylesheet" href="__ADMIN__/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+
+<!--[if lte IE 9]>
+<link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
+<![endif]-->
+<link rel="stylesheet" href="__ADMIN__/assets/css/ace-skins.min.css" />
+<link rel="stylesheet" href="__ADMIN__/assets/css/ace-rtl.min.css" />
+
+<!--[if lte IE 9]>
+<link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+<![endif]-->
+<link rel="stylesheet" href="__ADMIN__/css/style.min.css">
+
+<!-- inline styles related to this page -->
+<!--  <link rel="stylesheet" href="__ADMIN__/layui/css/layui.css"  media="all"> -->
+<!-- ace settings handler -->
+<script src="__ADMIN__/assets/js/ace-extra.min.js"></script>
+
+<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+
+<!--[if lte IE 8]>
+<script src="assets/js/html5shiv.min.js"></script>
+<script src="assets/js/respond.min.js"></script>
+<![endif]-->
+<!-- basic scripts -->
+
+<!--[if !IE]> -->
+<script src="__ADMIN__/assets/js/jquery-2.1.4.min.js"></script>
+
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script src="assets/js/jquery-1.11.3.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+  if('ontouchstart' in document.documentElement) document.write("<script src='__ADMIN__/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+<script src="__ADMIN__/assets/js/bootstrap.min.js"></script>
+
+<!-- page specific plugin scripts -->
+
+<!--[if lte IE 8]>
+<script src="assets/js/excanvas.min.js"></script>
+<![endif]-->
+<script src="__ADMIN__/assets/js/jquery-ui.custom.min.js"></script>
+<script src="__ADMIN__/assets/js/jquery.ui.touch-punch.min.js"></script>
+<script src="__ADMIN__/assets/js/bootbox.js"></script>
+<script src="__ADMIN__/assets/js/jquery.easypiechart.min.js"></script>
+<script src="__ADMIN__/assets/js/jquery.gritter.min.js"></script>
+<script src="__ADMIN__/assets/js/jquery.sparkline.index.min.js"></script>
+<script src="__ADMIN__/assets/js/jquery.inputlimiter.min.js"></script>
+<script src="__ADMIN__/assets/js/jquery.colorbox.min.js"></script>
+<!--日期选择-->
+<script src="__ADMIN__/assets/js/bootstrap-datepicker.js"></script>
+<script src="__ADMIN__/assets/js/locales/bootstrap-datepicker.zh-CN.js"></script>
+<script src="__ADMIN__/assets/js/bootstrap-timepicker.min.js"></script>
+<script src="__ADMIN__/assets/js/moment.min.js"></script>
+<script src="__ADMIN__/assets/js/daterangepicker.min.js"></script>
+<script src="__ADMIN__/assets/js/bootstrap-datetimepicker.min.js"></script>
+
+<!--表单验证-->
+<script src="__ADMIN__/assets/js/wizard.min.js"></script>
+<script src="__ADMIN__/assets/js/jquery.validate.min.js"></script>
+<!--<script src="assets/js/jquery.flot.min.js"></script>-->
+<!--<script src="assets/js/jquery.flot.pie.min.js"></script>-->
+<!--<script src="assets/js/jquery.flot.resize.min.js"></script>-->
+<!--增加-->
+<script src="__ADMIN__/assets/layer/layer.js"></script>
+<script src="__ADMIN__/assets/js/jquery.form.js"></script>
+<!-- ace scripts -->
+<script src="__ADMIN__/assets/js/ace-elements.min.js"></script>
+<script src="__ADMIN__/assets/js/ace.min.js"></script>
+<script src="__ADMIN__/js/main.js"></script>
+<!--表单验证-->
+<script src="__ADMIN__/js/Validform_v5.3.2_min.js"></script>
+<script src="__ADMIN__/assets/js/jquery.form.js"></script>
+  <script src="__ADMIN__/assets/js/jquery.maskedinput.min.js"></script>
+<style>
+    /*==========以下部分是Validform必须的===========*/
+    .Validform_checktip{
+      margin-left:8px;
+      line-height:20px;
+      height:20px;
+      overflow:hidden;
+      color:#999;
+      font-size:12px;
+    }
+    .Validform_right{
+      color:#71b83d;
+      padding-left:20px;
+      background:url(__ADMIN__/img/right.png) no-repeat left center;
+    }
+    .Validform_wrong{
+      color:red;
+      padding-left:20px;
+      white-space:nowrap;
+      background:url(__ADMIN__/img/error.png) no-repeat left center;
+    }
+    .Validform_loading{
+      padding-left:20px;
+      background:url(__ADMIN__/img/onLoad.gif) no-repeat left center;
+    }
+    .Validform_error{
+      background-color:#ffe7e7;
+    }
+    #Validform_msg{color:#7d8289; font: 12px/1.5 tahoma, arial, \5b8b\4f53, sans-serif; width:280px; -webkit-box-shadow:2px 2px 3px #aaa; -moz-box-shadow:2px 2px 3px #aaa; background:#fff; position:absolute; top:0px; right:50px; z-index:99999; display:none;filter: progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#999999');}
+    #Validform_msg .iframe{position:absolute; left:0px; top:-1px; z-index:-1;}
+    #Validform_msg .Validform_title{line-height:25px; height:25px; text-align:left; font-weight:bold; padding:0 8px; color:#fff; position:relative; background-color:#000;}
+    #Validform_msg a.Validform_close:link,#Validform_msg a.Validform_close:visited{line-height:22px; position:absolute; right:8px; top:0px; color:#fff; text-decoration:none;}
+    #Validform_msg a.Validform_close:hover{color:#cc0;}
+    #Validform_msg .Validform_info{padding:8px;border:1px solid #000; border-top:none; text-align:left;}
+  </style>
+</head>

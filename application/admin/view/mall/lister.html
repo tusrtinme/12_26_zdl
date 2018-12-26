@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+{include file="public:header"}
+
+<body class="no-skin">
+<!--头部-->
+{include file="public:nav"}
+
+<div class="main-container ace-save-state" id="main-container">
+  <!--菜单-->
+  <script type="text/javascript">
+  try{ace.settings.loadState('main-container')}catch(e){}
+</script>
+
+{include file="public:left"}
+
+  <div class="main-content">
+    <div class="main-content-inner">
+      <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+        <ul class="breadcrumb">
+          <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="{:url('Index/index')}">首页</a>
+          </li>
+          <li class="active">积分商品</li>
+        </ul>
+
+      </div>
+
+      <div class="page-content">
+        {include file="public:set"}
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="col-sm-10 col-sm-offset-1">
+              <div class="page-header">
+                <div class="row">
+                <div class="col-sm-4">
+                <a class="btn btn-success btn-white btn-bold" href="{:url('Mall/add')}">
+                  <i class="ace-icon fa fa-plus icon-only"></i>
+                  添加</a>
+             
+                </div>
+
+                <!-- <div class="col-sm-8 clearfix">
+                  <form class="form-inline pull-right" action="">
+                    <div class="form-group">
+                      <div class="input-group">
+									<span class="input-group-addon">
+											<i class="fa fa-th-list"></i>
+										</span>
+                        <select class="form-control" name="" id="">
+                          <option selected value="">分类</option>
+                          <option value="">asdasd</option>
+                          <option value="">asdasd</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="input-group">
+									<span class="input-group-addon">
+											<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+										</span>
+                        <input type="text" class="form-control" value="" placeholder="点击选择日期范围" name="date-range-picker"
+                               id="id-date-range-picker-1">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="input-group">
+									<span class="input-group-addon">
+										<i class="ace-icon fa fa-check"></i>
+									</span>
+                        <input type="text" name="key" id="key" class="form-control search-query" value="" placeholder="请输入需查询的关键字">
+                        <span class="input-group-btn">
+										<button type="submit" class="btn btn-info btn-sm ajax-search-form">
+											<span class="ace-icon fa fa-search icon-on-right bigger-120"></span> 搜索
+									</button>
+									</span>
+                      </div>
+                    </div>
+                  </form>
+                </div> -->
+                </div>
+              </div>
+              <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+              
+                  <th>ID</th>
+                  <th>商品名称</th>
+                  <!-- <th>商品价格</th> -->
+                  <th>商品积分</th>
+                  <th class="hidden-480">缩略图</th>
+                  <th>上下架</th>
+                  <th style="border-right:#ddd solid 1px;">操作</th>
+                </tr>
+                </thead>
+                <form id="sortForm" action="__URL__/sort" method="post"> 
+                <tbody>
+                {volist name="list" id="v"}
+                <tr class="ace-thumbnails">
+              
+                  <td><span class="badge badge-grey">{$v.mid}</span></td>
+                  <td>{$v.mname}</td>
+                 <!--  <td>{$v.mprice}</td> -->
+                  <td>{$v.minteg}</td>
+                  <td class="ace-thumbnails hidden-480">
+                    <li><a href="{$v.mimage}" data-rel="colorbox">
+                      <img width="80" height="80" alt="150x150" src="{$v.mimage}"/>
+                      <div class="text">
+                        <div class="inner">点击放大</div>
+                      </div>
+                    </a></li>
+                  </td>
+              
+                  <td>
+                    <label>
+                      <input id="statu" name="g_status" onclick="changes({$v.mid})" class="ace ace-switch ace-switch-6" type="checkbox" {if condition="$v.mup eq 1"}checked{/if} />
+                      <span class="lbl"></span>
+                    </label>
+                  </td>
+           
+          
+                  
+                  <td>
+                    <a class="btn btn-xs btn-info" href="{:url('modifys',array('id'=>$v['mid']))}">
+                      <i class="ace-icon fa fa-pencil bigger-120"></i>
+                    </a>
+                    <button class="btn btn-xs btn-danger" type="button" onclick="dels({$v.mid})">
+                      <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                    </button>
+                  </td>
+                </tr>
+                {/volist}
+                {empty name="list"}<tr><td colspan="18" class="text-center">暂无数据</td></tr>{/empty}
+                </tbody>
+                </form>
+              </table>
+              <div class="text-center">
+                {$page}
+              </div>
+            </div>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.page-content -->
+    </div>
+  </div><!-- /.main-content -->
+
+{include file="public:footer"}
+
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+  <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+</a>
+</div><!-- /.main-container -->
+
+<script>
+  jQuery(function($) {
+    $('[data-rel=tooltip]').tooltip();
+
+    $( "#hide-option" ).tooltip({
+      hide: {
+        effect: "explode",
+        delay: 250
+      }
+    });
+
+  })
+</script>
+<script type="text/javascript">
+		function dels(id){
+			layer.confirm('你确定删除吗？', {icon: 3}, function(index){
+		    layer.close(index);
+		    window.location.href="__URL__/delete/id/"+id;
+		  });
+	    }
+		</script>
+<script>
+function changes(id){
+	$.ajax({
+		type:"post",
+		url:"__URL__/changes",
+	    data:{id:id},
+	    datatype:"text",
+	    success:function(){
+	    	
+	    }
+	})
+}
+function changeu(id){
+	$.ajax({
+		type:"post",
+		url:"__URL__/changeu",
+	    data:{id:id},
+	    datatype:"text",
+	    success:function(){
+	    	
+	    }
+	})
+}
+function changea(id){
+	$.ajax({
+		type:"post",
+		url:"__URL__/changea",
+	    data:{id:id},
+	    datatype:"text",
+	    success:function(){
+	    	
+	    }
+	})
+}
+function changel(id){
+	$.ajax({
+		type:"post",
+		url:"__URL__/changel",
+	    data:{id:id},
+	    datatype:"text",
+	    success:function(){
+	    	
+	    }
+	})
+}
+function changess(id){
+	$.ajax({
+		type:"post",
+		url:"__URL__/changess",
+	    data:{id:id},
+	    datatype:"text",
+	    success:function(){
+	    	
+	    }
+	})
+}
+function changeh(id){
+	$.ajax({
+		type:"post",
+		url:"__URL__/changeh",
+	    data:{id:id},
+	    datatype:"text",
+	    success:function(){
+	    	
+	    }
+	})
+}
+</script>
+
+
+  <script>
+  $("#change").click(function(){
+  	$("#sortForm").submit();
+  })
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+{include file="public:header"}
+
+<body class="no-skin">
+<!--头部-->
+{include file="public:nav"}
+
+<div class="main-container ace-save-state" id="main-container">
+  <!--菜单-->
+  <script type="text/javascript">
+  try{ace.settings.loadState('main-container')}catch(e){}
+</script>
+
+{include file="public:left"}
+
+  <div class="main-content">
+    <div class="main-content-inner">
+      <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+        <ul class="breadcrumb">
+          <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="{:url('Index/index')}">首页</a>
+          </li>
+          <li class="active">积分明细</li>
+        </ul><!-- /.breadcrumb -->
+
+      </div>
+
+      <div class="page-content">
+        {include file="public:set"}
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="col-sm-10 col-sm-offset-1">
+              <div class="page-header">
+                <div class="row">
+               <!--  <div class="col-sm-4">
+                <a class="btn btn-success btn-white btn-bold" href="{:url('News/add')}">
+                  <i class="ace-icon fa fa-plus icon-only"></i>
+                  添加</a>
+                <button id="change" class="btn btn-warning btn-white btn-bold">
+                  <i class="fa fa-exchange"></i>
+                  排序
+                </button>
+                <button class="btn btn-danger btn-white btn-bold del-btn">
+                  <i class="ace-icon fa fa-trash-o icon-only"></i>
+                  删除
+                </button>
+                </div> -->
+
+               <!-- <div class="col-sm-12 clearfix">
+                  <form class="form-inline pull-right" action="__URL__/index" method="post">
+                                       
+                    <div class="form-group">
+                      <div class="input-group">
+									
+                        <input type="text" name="phone"  class="form-control search-query"  placeholder="请输入手机号码">
+                        <span class="input-group-btn">
+										<button type="submit" class="btn btn-info btn-sm ajax-search-form">
+											<span class="ace-icon fa fa-search icon-on-right bigger-120"></span> 搜索
+									</button>
+									</span>
+                      </div>
+                    </div>
+                  </form>
+                </div> --> 
+                </div>
+              </div>
+              <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  
+                  <th>ID</th>                 
+                  <th>类型</th>
+                  <th>积分</th>
+                  <th>时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                {volist name="list" id="v"}
+                <tr class="ace-thumbnails">
+                 
+                  <td><span class="badge badge-grey">{$v.id}</span></td>
+                  <td>{$v.type}</td>
+                  <td class="hidden-480">{$v.money}
+                  <td>{$v.time|date="Y-m-d H:i:s",###}</td>
+                 
+                </tr>
+                {/volist}
+                {empty name="list"}<tr><td colspan="15" class="text-center">暂无数据</td></tr>{/empty}
+                </tbody>
+              </table>
+              <div class="text-center">
+                {$page}
+              </div>
+            </div>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.page-content -->
+    </div>
+  </div><!-- /.main-content -->
+
+{include file="public:footer"}
+
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+  <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+</a>
+</div><!-- /.main-container -->
+
+<script>
+  jQuery(function($) {
+    $('[data-rel=tooltip]').tooltip();
+
+    $( "#hide-option" ).tooltip({
+      hide: {
+        effect: "explode",
+        delay: 250
+      }
+    });
+
+  })
+</script>
+<script type="text/javascript">
+		function dels(id){
+			layer.confirm('你确定删除吗？', {icon: 3}, function(index){
+		    layer.close(index);
+		    window.location.href="__URL__/delete/id/"+id;
+		  });
+	    }
+		</script>
+<script>
+function add_integz(id){
+	layer.prompt({title: '请输入要充值的待返积分', formType: 3}, function(text, index){
+	    
+	    var n = /^[1-9]\d*$/; 
+        if(!n.test(text)){
+            layer.alert('请输入正确的充值积分');return false;
+        }else{
+        	$.ajax({
+        		type:"post",
+        		url:"__URL__/add_integz",
+        		data:{id:id,integz:text},
+        		datatype:"text",
+        		success:function(re){
+        			if(re == 1){
+        				layer.close(index);
+        				layer.msg("充值成功");
+        				location.reload();
+        			}else{
+        				layer.close(index);
+        				layer.msg("系统繁忙，请稍后再试");
+        				location.reload();
+        			}
+        			
+        		}
+        	})
+        }
+	  });
+}
+function add_integf(id){
+	layer.prompt({title: '请输入要充值的释放积分', formType: 3}, function(text, index){
+	    
+	    var n = /^[1-9]\d*$/; 
+        if(!n.test(text)){
+            layer.alert('请输入正确的充值积分');return false;
+        }else{
+        	$.ajax({
+        		type:"post",
+        		url:"__URL__/add_integf",
+        		data:{id:id,integz:text},
+        		datatype:"text",
+        		success:function(re){
+        			if(re == 1){
+        				layer.close(index);
+        				layer.msg("充值成功");
+        				location.reload();
+        			}else{
+        				layer.close(index);
+        				layer.msg("系统繁忙，请稍后再试");
+        				location.reload();
+        			}
+        			
+        		}
+        	})
+        }
+	  });
+}
+function add_integ(id){
+	layer.prompt({title: '请输入要充值的积分', formType: 3}, function(text, index){
+	    
+	    var n = /^[1-9]\d*$/; 
+        if(!n.test(text)){
+            layer.alert('请输入正确的充值积分');return false;
+        }else{
+        	$.ajax({
+        		type:"post",
+        		url:"__URL__/add_integ",
+        		data:{id:id,integz:text},
+        		datatype:"text",
+        		success:function(re){
+        			if(re == 1){
+        				layer.close(index);
+        				layer.msg("充值成功");
+        				location.reload();
+        			}else{
+        				layer.close(index);
+        				layer.msg("系统繁忙，请稍后再试");
+        				location.reload();
+        			}
+        			
+        		}
+        	})
+        }
+	  });
+}
+</script>
+
+
+  <script>
+  $("#change").click(function(){
+  	$("#sortForm").submit();
+  })
+
+  </script>
+</body>
+</html>

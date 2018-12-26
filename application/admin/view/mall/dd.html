@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+{include file="public:header"}
+
+<body class="no-skin">
+<!--头部-->
+{include file="public:nav"}
+
+<div class="main-container ace-save-state" id="main-container">
+  <!--菜单-->
+  <script type="text/javascript">
+  try{ace.settings.loadState('main-container')}catch(e){}
+</script>
+
+{include file="public:left"}
+
+  <div class="main-content">
+    <div class="main-content-inner">
+      <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+        <ul class="breadcrumb">
+          <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="{:url('Index/index')}">首页</a>
+          </li>
+          <li class="active">待付款列表</li>
+        </ul>
+
+      </div>
+
+      <div class="page-content">
+        {include file="public:set"}
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="col-sm-10 col-sm-offset-1">
+              <div class="page-header">
+                <div class="row">
+              <div class="col-sm-2">
+                <a class="btn btn-success btn-white btn-bold" href="javascript:;" id="out">
+                  <i class="ace-icon fa fa-plus icon-only"></i>
+                  导出excel</a>
+                </div> 
+
+                 <div class="col-sm-10 clearfix">
+                  <form class="form-inline pull-right" action="__URL__/dd" method="post">
+                    <div class="form-group">
+                    	<div class="input-daterange input-group">
+						<input type="text" class="form-control search-query" name="start" value="{$start}" placeholder="选择开始时间" />
+						<span class="input-group-addon">
+							<i class="fa fa-exchange"></i>
+						</span>
+
+						<input type="text" class="form-control search-query" name="end" value="{$end}" placeholder="选择结束时间" />
+					</div>
+                    	
+                    </div>
+                    
+                    <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" name="code"  class="form-control search-query" value="{$code}" placeholder="请输入订单号码">
+                      </div>
+                      
+                      <div class="input-group">
+                        <input type="text" name="username"  class="form-control search-query" value="{$username}" placeholder="请输入收货人姓名">
+                      </div>
+                    
+                      <div class="input-group">
+                        <input type="text" name="phone"  class="form-control search-query" value="{$phone}" placeholder="请输入收货人电话">
+                      </div>
+                      <div class="input-group">
+                        <input type="text" name="addr" class="form-control search-query" value="{$addr}" placeholder="请输入收货人地址">
+                        <span class="input-group-btn">
+										<button type="submit" class="btn btn-info btn-sm ajax-search-form">
+											<span class="ace-icon fa fa-search icon-on-right bigger-120"></span> 搜索
+									</button>
+									</span>
+                      </div>
+                    </div>
+                  </form>
+                </div> 
+                </div>
+              </div>
+              <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                 
+                  <th>ID</th>
+                  <th>订单号</th>
+                  <th>商品名称</th>
+                  <th>商品图片</th>
+                  <th>订单金额</th>
+                  <th>订单积分</th>
+                  <th>下单时间</th>
+                  <th>收货人信息</th>
+                  <th style="border-right:#ddd solid 1px;">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {volist name="list" id="v"}
+                <tr class="ace-thumbnails">
+                  <td><span class="badge badge-grey">{$v.id}</span></td>
+                  <td>{$v.code}</td>
+                  <td>{$v.mname}</td>
+                   <td class="ace-thumbnails hidden-480">
+                    <li><a href="{$v.mimage}" data-rel="colorbox">
+                      <img width="80" height="80" alt="150x150" src="{$v.mimage}"/>
+                      <div class="text">
+                        <div class="inner">点击放大</div>
+                      </div>
+                    </a></li>
+                  </td>
+                  <td>{$v.mprice}</td>
+                  <td>{$v.minteg}</td>
+                  <td>{$v.time|date="Y-m-d H:i:s",###}</td>
+                  <th>
+                                                         收货人姓名：{$v.username}<br>
+                                                         收货人电话：{$v.phone}<br>
+                                                         收货人地址：{$v.addr}{$v.addrs}<br>
+                  </th>
+                  <td>
+
+                  <button class="btn btn-xs btn-success" type="button" onclick="change({$v.id})">
+                      确认付款
+                    </button> 
+                    <button class="btn btn-xs btn-danger" type="button" onclick="dels({$v.id})">
+                     删除订单
+                    </button> 
+                  </td>
+                </tr>
+                {/volist}
+                {empty name="list"}<tr><td colspan="18" class="text-center">暂无数据</td></tr>{/empty}
+                </tbody>
+              </table>
+              <div class="text-center">
+                {$page}
+              </div>
+            </div>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.page-content -->
+    </div>
+  </div><!-- /.main-content -->
+
+  <div class="footer">
+  <div class="footer-inner">
+    <div class="footer-content">
+						<span class="bigger-110">
+							<span class="blue bolder">Ace</span>
+							朵朵科技CMS &copy; 2018-2020
+						</span>
+
+      &nbsp; &nbsp;
+      <a href="http://www.dd371.com" target="_blank">技术支持: 朵朵科技</a>
+    </div>
+  </div>
+</div>
+
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+  <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+</a>
+</div><!-- /.main-container -->
+
+<script>
+  jQuery(function($) {
+	  
+	  $('.input-daterange').datepicker({
+		  autoclose:true,
+		  language:"zh-CN",
+          format:"yyyy-mm-dd"
+          });
+	  
+    $('[data-rel=tooltip]').tooltip();
+
+    $( "#hide-option" ).tooltip({
+      hide: {
+        effect: "explode",
+        delay: 250
+      }
+    });
+
+  })
+</script>
+<script>
+ $("#out").click(function(){
+	 var start="{$start}";
+	 var end = "{$end}";
+	 var username="{$username}";
+	 var code="{$code}";
+	 var phone="{$phone}";
+	 var addr="{$addr}";
+	 if(start == ''){
+		 start=0;
+	 }
+	 if(end == ''){
+		 end=0;
+	 }
+	
+	 if(username == ''){
+		 username = 0;
+	 }
+	 if(code == ''){
+		 code = 0;
+	 }
+	 if(phone == ''){
+		 phone = 0;
+	 }
+	 if(addr == ''){
+		 addr = 0;
+	 }
+	 location.href="__URL__/out/start/"+start+"/end/"+end+"/username/"+username+"/code/"+code+"/phone/"+phone+"/addr/"+addr;
+ })
+</script>
+<script type="text/javascript">
+		function dels(id){
+			layer.confirm('你确定删除此订单并退还用户积分吗？', {icon: 3}, function(index){
+		    layer.close(index);
+		    window.location.href="__URL__/delete_dd/id/"+id;
+		  });
+	    }
+		</script>
+<script type="text/javascript">
+		function change(id){
+			layer.confirm('你确定已付款吗？', {icon: 3}, function(index){
+		    layer.close(index);
+		    window.location.href="__URL__/change/id/"+id;
+		  });
+	    }
+		</script>
+<script>
+function changes(id){
+	$.ajax({
+		type:"post",
+		url:"__URL__/changes",
+	    data:{id:id},
+	    datatype:"text",
+	    success:function(){
+	    	
+	    }
+	})
+}
+function changeu(id){
+	$.ajax({
+		type:"post",
+		url:"__URL__/changeu",
+	    data:{id:id},
+	    datatype:"text",
+	    success:function(){
+	    	
+	    }
+	})
+}
+function changea(id){
+	$.ajax({
+		type:"post",
+		url:"__URL__/changea",
+	    data:{id:id},
+	    datatype:"text",
+	    success:function(){
+	    	
+	    }
+	})
+}
+function changel(id){
+	$.ajax({
+		type:"post",
+		url:"__URL__/changel",
+	    data:{id:id},
+	    datatype:"text",
+	    success:function(){
+	    	
+	    }
+	})
+}
+function changess(id){
+	$.ajax({
+		type:"post",
+		url:"__URL__/changess",
+	    data:{id:id},
+	    datatype:"text",
+	    success:function(){
+	    	
+	    }
+	})
+}
+function changeh(id){
+	$.ajax({
+		type:"post",
+		url:"__URL__/changeh",
+	    data:{id:id},
+	    datatype:"text",
+	    success:function(){
+	    	
+	    }
+	})
+}
+</script>
+
+
+  <script>
+  $("#change").click(function(){
+  	$("#sortForm").submit();
+  })
+
+  </script>
+</body>
+</html>

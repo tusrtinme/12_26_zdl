@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+{include file="public:header"}
+<body class="no-skin">
+<!--头部-->
+{include file="public:nav"}
+<div class="main-container ace-save-state" id="main-container">
+  <!--菜单-->
+  <script type="text/javascript">
+  try{ace.settings.loadState('main-container')}catch(e){}
+</script>
+
+{include file="public:left"}
+  <div class="main-content">
+    <div class="main-content-inner">
+      <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+        <ul class="breadcrumb">
+          <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="{:url('Index/index')}">首页</a>
+          </li>
+          <li class="active">网站设置</li>
+          <li class="active">基本信息</li>
+        </ul><!-- /.breadcrumb -->
+
+      </div>
+
+      <div class="page-content">
+        {include file="public:set"}
+        <div class="row">
+          <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+
+            <div class="col-sm-10 col-sm-offset-1">
+              <div class="alert alert-info">
+                <i class="ace-icon fa fa-hand-o-right"></i> 请您配置网站基本信息
+                <button class="close" data-dismiss="alert">
+                  <i class="ace-icon fa fa-times"></i>
+                </button>
+              </div>
+            <form class="form-horizontal" id="logoForm" action="__URL__/save" method="post" enctype="multipart/form-data">
+              <div class="row">
+                <div class="col-sm-8">
+                  <div class="widget-box transparent">
+                    <div class="widget-header widget-header-flat">
+                      <h4 class="widget-title"><i class="ace-icon fa fa-leaf green"></i>基本信息</h4>
+                    </div>
+                    <div class="widget-body">
+                    <div class="widget-main">
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label no-padding-right" for="">公司名称</label>
+                      <div class="col-sm-10">
+                        <input class="form-control" type="text" name="name" value="{$re.name}" >
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label no-padding-right" for="">负责人</label>
+                      <div class="col-sm-10">
+                        <input class="form-control" type="text" name="username" value="{$re.username}" >
+                      </div>
+                    </div>
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right" for="">网站域名</label>
+                        <div class="col-sm-4">
+                          <input class="form-control" type="text" name="url" value="{$re.url}">
+                        </div>
+                        <label class="col-sm-2 control-label no-padding-right" for="">客服QQ</label>
+                        <div class="col-sm-4">
+                          <input class="form-control" type="text" id="qq" name="qq" value="{$re.qq}" />
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right" for="">ICP备案</label>
+                        <div class="col-sm-4">
+                          <input class="form-control" type="text" name="icp" value="{$re.icp}">
+                        </div>
+                        <label class="col-sm-2 control-label no-padding-right" for="">企业邮箱</label>
+                        <div class="col-sm-4">
+                          <input class="form-control" type="email" id="mail" name="email" value="{$re.email}" />
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right" for="">移动电话</label>
+                        <div class="col-sm-4">
+                          <input class="form-control" type="text" name="phone" value="{$re.phone}">
+                        </div>
+                        <label class="col-sm-2 control-label no-padding-right" for="">固定电话</label>
+                        <div class="col-sm-4">
+                          <input class="form-control" type="tel" id="tel" name="tel" value="{$re.tel}" />
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right" for="">公司传真</label>
+                        <div class="col-sm-4">
+                          <input class="form-control" type="text" name="fax" value="{$re.fax}">
+                        </div>
+                        <label class="col-sm-2 control-label no-padding-right" for="">400电话</label>
+                        <div class="col-sm-4">
+                          <input class="form-control" type="tel" id="tel" name="telphone" value="{$re.telphone}" />
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right" for="">地图经度</label>
+                        <div class="col-sm-4">
+                          <input class="form-control" type="text" name="longs" value="{$re.longs}" />
+                        </div>
+
+                        <label class="col-sm-2 control-label no-padding-right" for="">地图纬度</label>
+                        <div class="col-sm-4">
+                          <input class="form-control" type="text" name="lats" value="{$re.lats}" />
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right" for="">公司地址</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" type="text" name="addr" value="{$re.addr}" />
+                        </div>
+                      </div>
+                      <div class="form-group">
+
+                        <label class="col-sm-2 control-label no-padding-right" for="">公司简介</label>
+                        <div class="col-sm-10">
+                          <script src="__ADMIN__/assets/js/ueditor.config.js" type="text/javascript"></script>
+                          <script src="__ADMIN__/assets/js/ueditor.all.js" type="text/javascript"></script>
+                          <textarea id="myEditor" name="content" style="width:100%;">{$re.content}</textarea>
+                          <script type="text/javascript">
+                            var editor = new UE.ui.Editor({
+                              initialFrameHeight: 300
+                            });
+                            editor.render("myEditor");
+                          </script>
+                        </div>
+                      </div>
+                  </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="widget-box transparent">
+                    <div class="widget-header widget-header-flat">
+                      <h4 class="widget-title"><i class="ace-icon fa fa-leaf green"></i>Logo</h4>
+                    </div>
+                    <div class="widget-body">
+                      <div class="widget-main">
+                        <div class="form-group">
+                          <div class="col-xs-12">
+                            <input multiple="" type="file" id="pclogo" name="pclogo"  />
+                            <img src="{$re.pclogo}" class="img-responsive" />
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-xs-12">
+                            <input multiple="" type="file" id="waplogo" name="waplogo" />
+                            <img src="{$re.waplogo}" class="img-responsive" />
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-xs-12">
+                            <input multiple="" type="file" id="qrcode" name="qrcode"  />
+                            <img src="{$re.qrcode}" class="img-responsive" />
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-xs-12">
+                            <input multiple="" type="file" id="wx" name="wx"  />
+                            <img src="{$re.wx}" class="img-responsive" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="clearfix form-actions">
+                <div class="col-md-offset-3 col-md-9">
+                  <button class="btn btn-info" type="submit">
+                    <i class="ace-icon fa fa-floppy-o bigger-110"></i>
+                    保存</button>
+                  <button class="btn" type="reset">
+                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                    重置</button>
+                </div>
+              </div>
+            </form>
+            </div>
+            <!-- PAGE CONTENT ENDS -->
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.page-content -->
+    </div>
+  </div><!-- /.main-content -->
+
+{include file="public:footer"}
+
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+  <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+</a>
+</div><!-- /.main-container -->
+
+
+<script>
+  jQuery(function($) {
+    $('[data-rel=tooltip]').tooltip();
+
+    $( "#hide-option" ).tooltip({
+      hide: {
+        effect: "explode",
+        delay: 250
+      }
+    });
+
+  })
+</script>
+
+
+  <script>
+    $(function(){
+      $('textarea.limited').inputlimiter({
+        remText: '%n 个字符可以输入...',
+        limitText: '最大长度 : %n.'
+      });
+
+      $('#pclogo').ace_file_input({
+        style: 'well',
+        btn_choose: 'Pc端Logo',
+        btn_change: null,
+        no_icon: 'ace-icon fa fa-picture-o',
+        droppable: true,
+        thumbnail: 'fit'//large | fit
+        //,icon_remove:null//set null, to hide remove/reset button
+        /**,before_change:function(files, dropped) {
+						//Check an example below
+						//or examples/file-upload.html
+						return true;
+					}*/
+        /**,before_remove : function() {
+						return true;
+					}*/
+        ,
+        preview_error : function(filename, error_code) {
+          //name of the file that failed
+          //error_code values
+          //1 = 'FILE_LOAD_FAILED',
+          //2 = 'IMAGE_LOAD_FAILED',
+          //3 = 'THUMBNAIL_FAILED'
+          //alert(error_code);
+        }
+
+      }).on('change', function(e){
+    	//  console.log(e)
+        //console.log($(this).data('ace_input_files'));
+        //console.log($(this).data('ace_input_method'));
+      });
+      $('#waplogo').ace_file_input({
+        style: 'well',
+        btn_choose: 'Wap端Logo',
+        btn_change: null,
+        no_icon: 'ace-icon fa fa-picture-o',
+        droppable: true,
+        thumbnail: 'fit'//large | fit
+        //,icon_remove:null//set null, to hide remove/reset button
+        /**,before_change:function(files, dropped) {
+						//Check an example below
+						//or examples/file-upload.html
+						return true;
+					}*/
+        /**,before_remove : function() {
+						return true;
+					}*/
+        ,
+        preview_error : function(filename, error_code) {
+          //name of the file that failed
+          //error_code values
+          //1 = 'FILE_LOAD_FAILED',
+          //2 = 'IMAGE_LOAD_FAILED',
+          //3 = 'THUMBNAIL_FAILED'
+          //alert(error_code);
+        }
+
+      }).on('change', function(){
+        //console.log($(this).data('ace_input_files'));
+        //console.log($(this).data('ace_input_method'));
+      });
+
+      $('#qrcode').ace_file_input({
+        style: 'well',
+        btn_choose: '微信二维码',
+        btn_change: null,
+        no_icon: 'ace-icon fa fa-wechat',
+        droppable: true,
+        thumbnail: 'fit'//large | fit
+        //,icon_remove:null//set null, to hide remove/reset button
+        /**,before_change:function(files, dropped) {
+						//Check an example below
+						//or examples/file-upload.html
+						return true;
+					}*/
+        /**,before_remove : function() {
+						return true;
+					}*/
+        ,
+        preview_error : function(filename, error_code) {
+          //name of the file that failed
+          //error_code values
+          //1 = 'FILE_LOAD_FAILED',
+          //2 = 'IMAGE_LOAD_FAILED',
+          //3 = 'THUMBNAIL_FAILED'
+          //alert(error_code);
+        }
+
+      }).on('change', function(){
+        //console.log($(this).data('ace_input_files'));
+        //console.log($(this).data('ace_input_method'));
+      });
+
+      $('#wx').ace_file_input({
+        style: 'well',
+        btn_choose: '微信公众号',
+        btn_change: null,
+        no_icon: 'ace-icon fa fa-wechat',
+        droppable: true,
+        thumbnail: 'fit'//large | fit
+        //,icon_remove:null//set null, to hide remove/reset button
+        /**,before_change:function(files, dropped) {
+						//Check an example below
+						//or examples/file-upload.html
+						return true;
+					}*/
+        /**,before_remove : function() {
+						return true;
+					}*/
+        ,
+        preview_error : function(filename, error_code) {
+          //name of the file that failed
+          //error_code values
+          //1 = 'FILE_LOAD_FAILED',
+          //2 = 'IMAGE_LOAD_FAILED',
+          //3 = 'THUMBNAIL_FAILED'
+          //alert(error_code);
+        }
+
+      }).on('change', function(){
+        //console.log($(this).data('ace_input_files'));
+        //console.log($(this).data('ace_input_method'));
+      });
+
+
+      $.mask.definitions['~']='[+-]';
+      $('#phone').mask('999-9999-9999');
+    })
+  </script>
+<script>
+$(function(){
+	$('#logoForm').ajaxForm({
+		beforeSubmit: checkForm, // 此方法主要是提交前执行的方法，根据需要设置
+		success: complete, // 这是提交后的方法
+		dataType: 'json'
+	});
+	
+	function checkForm(){
+	  
+		
+    }
+
+	function complete(data){
+		if(data.status==1){
+			layer.alert(data.msg, {icon: 5}, function(index){
+ 			layer.close(index);
+ 			window.location.href=data.url;
+			});
+			
+		}else{
+			layer.alert(data.msg, {icon: 6}, function(index){
+ 			layer.close(index);
+ 			window.location.href=data.url;
+			});
+			
+		}
+	}
+ 
+});
+
+</script>
+
+</body>
+</html>

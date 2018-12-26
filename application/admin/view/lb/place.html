@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+{include file="public:header"}
+
+<body class="no-skin">
+<!--头部-->
+{include file="public:nav"}
+
+<div class="main-container ace-save-state" id="main-container">
+  <!--菜单-->
+  <script type="text/javascript">
+  try{ace.settings.loadState('main-container')}catch(e){}
+</script>
+
+{include file="public:left"}
+
+  <div class="main-content">
+    <div class="main-content-inner">
+      <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+        <ul class="breadcrumb">
+          <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="{:url('Index/index')}">首页</a>
+          </li>
+          <li class="active">广告位</li>
+        </ul><!-- /.breadcrumb -->
+
+      </div>
+
+      <div class="page-content">
+
+        {include file="public:set"}
+
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="col-sm-10 col-sm-offset-1">
+              <div class="page-header">
+                <button class="btn btn-success btn-white btn-bold" data-toggle="modal" data-target="#add">
+                  <i class="ace-icon fa fa-plus icon-only"></i>
+                  添加</button>
+                <!-- <button class="btn btn-danger btn-white btn-bold del-btn">
+                  <i class="ace-icon fa fa-trash-o icon-only"></i>
+                  删除</button> -->
+              </div>
+              <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <!-- <th class="center">
+                    <label class="pos-rel">
+                      <input type="checkbox" class="ace checkAll">
+                      <span class="lbl"></span>
+                    </label>
+                  </th> -->
+                  <th>ID</th>
+                  <th>广告位名称</th>
+                  <th style="border-right:#ddd solid 1px;">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {volist name="list" id="v"}
+                <tr>
+                  <!-- <td class="center"><label class="pos-rel">
+                    <input type="checkbox" class="ace check">
+                    <span class="lbl"></span>
+                  </label>
+                  </td> -->
+                  
+                  <td><span class="badge badge-grey">{$v.pl_id}</span></td>
+                  <td>{$v.pl_name}</td>
+                  <td>
+                    <button class="btn btn-xs btn-info" onclick="ajaxQuery('modify',{$v.pl_id},readData)">
+                      <i class="ace-icon fa fa-pencil bigger-120"></i>
+                    </button>
+                   <!--  <button class="btn btn-xs btn-danger" onclick="ajaxDel('data.json',1,gs)">
+                      <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                    </button> -->
+                  </td>
+                </tr>
+                {/volist}
+                </tbody>
+              </table>
+              <div class="text-center">
+                <ul class="pagination">
+                  {$list->render();}
+                </ul>
+              </div>
+            </div>
+            <!-- PAGE CONTENT BEGINS -->
+
+            <!-- PAGE CONTENT ENDS -->
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.page-content -->
+    </div>
+  </div><!-- /.main-content -->
+  <!-- Modal -->
+  <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">添加</h4>
+        </div>
+        <div class="modal-body">
+          <form id="modal-form" class="form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right" for="">广告位名称</label>
+              <div class="col-sm-8">
+                <input id="name" class="form-control" type="text" name="name" required>
+              </div>
+              <input type="hidden" name="id" id="id" />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          <button id="save-btn" type="button" class="btn btn-primary">保存</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{include file="public:footer"}
+
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+  <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+</a>
+</div><!-- /.main-container -->
+
+
+
+<script>
+  jQuery(function($) {
+    $('[data-rel=tooltip]').tooltip();
+
+    $( "#hide-option" ).tooltip({
+      hide: {
+        effect: "explode",
+        delay: 250
+      }
+    });
+
+  })
+</script>
+
+
+  <script>
+    $(function () {
+      //添加-模态框
+      $("#save-btn").on(ace.click_event,function () {
+        //获取form表单,执行ajaxSubmit提交
+        var name = $("#name").val();
+    	  if($.trim(name) == ''){
+        	  layer.alert("请输入广告位名称！",{icon:5});
+        	  return false;
+          }
+    	var id = $("#id").val();
+        $("#add").ajaxSubmit({
+          url: '__URL__/save_place',
+          type: 'post',
+          data:{name:name,id:id},
+          datatype:"text",
+          success: function(res){
+            //后台返回状态,保存成功
+            if(res.code == 1){
+              success(res.msg);
+              location.href=res.url;
+            }else{
+              error(res.msg);
+              location.href=res.url;
+            }
+          }
+        })
+      })
+    });
+
+    //向模态框写入数据
+    function readData(data) {
+    	$(".modal-title").text('修改');
+      $("#id").val(data.pl_id);
+      $("#name").val(data.pl_name);    
+      $('#add').modal('show');
+    }
+
+    function gs() {
+      console.log(1)
+    }
+  //bs模态框关闭事件回调函数
+    $('#add').on('hidden.bs.modal', function (e) {
+  // do something...
+  $('#modal-form').get(0).reset();
+  $(".modal-title").text('添加');
+	})
+
+  </script>
+</body>
+</html>
