@@ -1,0 +1,1 @@
+$(function(){$(".goods_classify_sidebar").on("click",".js-option",classify.option),$(".goods_classify_list").on("click",".js-classify",classify.classify)});var classify={option:function(){$(this).hasClass("active")||($(".js-option").removeClass("active"),$(this).addClass("active"))},classify:function(){window.location.href="goods_list.html"}};

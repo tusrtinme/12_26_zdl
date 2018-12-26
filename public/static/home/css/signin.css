@@ -1,0 +1,267 @@
+.hide {
+  display: none
+}
+
+.show {
+  display: block
+}
+
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis
+}
+
+.break {
+  word-wrap: break-word;
+  word-break: break-all
+}
+
+.flex,
+.fn-flex {
+  display: -webkit-box;
+  display: box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex
+}
+
+.flex-v,
+.fn-flex.tb {
+  flex-direction: column;
+  -webkit-flex-flow: column;
+  flex-flow: column;
+  -ms-flex-direction: column;
+  -webkit-box-orient: vertical;
+  box-orient: vertical
+}
+
+article,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+  clear: all
+}
+
+.flex-align-center {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center
+}
+
+.flex-pack-center {
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center
+}
+
+.flex-pack-justify {
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between
+}
+
+.flex-pack-start {
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start
+}
+
+.flex-pack-end {
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end
+}
+
+.flex-warp {
+  -ms-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap
+}
+
+.flex-direction-bottom {
+  flex-direction: column-reverse;
+  -webkit-flex-direction: column-reverse;
+  -webkit-box-pack: end;
+  -ms-box-pack: end
+}
+
+.user-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none
+}
+.border-small-top,.border-small-bottom{
+  position: relative;
+}
+.border-small-top:after,
+.border-small-bottom:before {
+  content: "  ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  width: 200%;
+  height: 1px;
+  background: #ddd;
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scale(.5, .5);
+  transform: scale(.5, .5);
+}
+
+.border-small-top:after {
+  left: 0;
+  top: 0;
+}
+.border-small-bottom:before {
+  left: 0;
+  top: 100%;
+}
+.icon {
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+.top {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  background: #e23b33;
+  /*margin-bottom: .8rem;*/
+  overflow: hidden;
+}
+
+.top .sign-guize {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 12px;
+  line-height: 20px;
+  padding: 0 10px;
+  background-color: #f09b38;
+  color: #fff;
+  border-radius: 10px;
+}
+
+.top .out-1 {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  background: rgba(255, 255, 255, 0.4);
+  margin: 1rem auto 0 auto;
+}
+.top .out-1 .out-2 {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  background: #ffffff;
+  margin: 0 auto;
+}
+.top .out-1 .out-2 .signBtn {
+  width: 6.2rem;
+  height: 6.2rem;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  border: 1px lightpink solid;
+}
+.top .out-1 .out-2 .signBtn strong,
+.top .out-1 .out-2 .signBtn span {
+  display: block;
+  width: 85%;
+  font-size: 16px;
+  margin: 0 auto;
+  text-align: center;
+  color: #e23b33;
+}
+.top .out-1 .out-2 .signBtn strong {
+  height: 3.5rem;
+  line-height: 4.5rem;
+  font-weight: 600;
+  border-bottom: 1px #eee solid;
+}
+.top .out-1 .out-2 .signBtn span {
+  height: 2.5rem;
+  line-height: 2.5rem;
+  font-size: 12px;
+  line-height: 2rem !important;
+}
+.top .out-1:active {
+  animation: sign .25s forwards;
+  -webkit-animation: sign .25s forwards;
+}
+.tips {
+  position: absolute;
+  top: 10rem;
+  left: 50%;
+  transform: translate(-50%);
+  z-index: 999;
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  padding-bottom: .5rem;
+}
+.Calendar {
+  background: #fff;
+  padding-bottom: 1rem;
+}
+.Calendar #toyear {
+  border-bottom: 1px #e7e7e7 solid;
+  width: 96%;
+  margin: 0 auto;
+  height: 40px;
+  text-align: center;
+  color: #333;
+}
+.Calendar #toyear .year-month {
+  height: 100%;
+  line-height: 40px;
+  font-size: 14px;
+}
+.Calendar #toyear #idCalendarPre,
+.Calendar #toyear #idCalendarNext {
+  height: 100%;
+  line-height: 40px;
+  padding: 0 2rem;
+  text-align: center;
+  font-size: 13px;
+  color: #999;
+}
+.Calendar table,
+.Calendar tr,
+.Calendar td {
+  border: 0;
+}
+.Calendar table {
+  width: 96%;
+  margin: 0 auto;
+}
+.Calendar table tr {
+  text-align: center;
+  height: 30px;
+}
+.Calendar table tr td span {
+  margin: 0 auto;
+  display: block;
+  line-height: 24px;
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
+  border-radius: 50%;
+}
+.Calendar table tr .onToday span {
+  background: #e23b33;
+  color: #fff;
+}
