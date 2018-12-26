@@ -1,0 +1,1 @@
+$(function(){$(".js-option-box").on("click",".js-option-checked",events.option_checked),$("#js-back").click(events.back)});var events={option_checked:function(){$(".js-option-checked").removeClass("active"),$(this).addClass("active")},back:function(){history.back(-1)}};
